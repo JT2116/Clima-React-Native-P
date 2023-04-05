@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { StyleSheet, Text, View } from 'react-native';
 
+
 const Citys = () => {
+
     return(
         <View style={styles.container}>
-            <Text style={styles.text}>Citys</Text>
+            <Text style={styles.text}>Citys</Text>            
         </View>
     )
 }
