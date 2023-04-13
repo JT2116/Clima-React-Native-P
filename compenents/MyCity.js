@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, FlatList, ActivityIndicator } from 'react-native';
 import * as Location from 'expo-location';
 
 const MyCity = () => {
@@ -41,12 +41,14 @@ const MyCity = () => {
     let getWeather = async () => {
         try {
             const response = await fetch (url);
-            const json = await response.json();
-            console.log(json);
-            setData(json);
+            const json = await response.json();            
+            setData(json.weather);
+            // console.log(data);        
                         
         } catch (error) {
             console.error(error);
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -55,30 +57,39 @@ const MyCity = () => {
         getWeather();
     },[]);
 
-    console.log(data);
 
-    
+    // console.log(data);
 
-    return(
+    return(        
         <View style={styles.container}>
-            <Text style={styles.text}>{city}</Text>
-
-            <Text style={styles.text}>{}</Text>
-
+            <FlatList
+                data = {data}
+                contentContainerStyle={styles.listView}                
+                renderItem={({item}) => 
+                    <Text style={styles.text}>
+                        {item.description}              
+                    </Text>
+                }                
+            />         
         </View>
-    )
-}
+    );
+};
 
 const styles = StyleSheet.create({
     container:{
         flex: 1,
+        padding: 24,
         justifyContent: 'center',
-        alignContent: 'center',
-        backgroundColor: 'white'
+        // alignContent: 'center',
+        // backgroundColor: 'white'
     },
     text: {
-        color: 'black'
+        color: 'black',        
+    },
+    listView: {
+        flex: 1,
+        justifyContent: 'center',
     }
-})
+});
 
 export default MyCity;
