@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, Text, View, FlatList, ActivityIndicator } from 'react-native';
+import { StyleSheet, Text, View, FlatList, ActivityIndicator, Image } from 'react-native';
 import * as Location from 'expo-location';
 
 const MyCity = () => {
@@ -10,6 +10,7 @@ const MyCity = () => {
     
     const [isLoading, setLoading] = useState(true);
     const [data, setData] = useState([]);
+    const [icon, setIcon] = useState();
 
     
     let getCity = async () => {
@@ -43,6 +44,8 @@ const MyCity = () => {
             const response = await fetch (url);
             const json = await response.json();            
             setData(json.weather);
+            // setIcon(json.weather.icon);  
+                
             // console.log(data);        
                         
         } catch (error) {
@@ -57,18 +60,25 @@ const MyCity = () => {
         getWeather();
     },[]);
 
-
-    // console.log(data);
+    // let UrlIcon = ``
+    // console.log(icon);
+    console.log(data[icon]);
 
     return(        
         <View style={styles.container}>
+            <Text style={styles.text}>{city}</Text>
+            <Image
+                source={{uri: 'http://openweathermap.org/img/w/02d.png'}}
+            />            
             <FlatList
                 data = {data}
                 contentContainerStyle={styles.listView}                
-                renderItem={({item}) => 
+                renderItem={({item}) =>                        
                     <Text style={styles.text}>
                         {item.description}              
                     </Text>
+
+
                 }                
             />         
         </View>
@@ -80,8 +90,8 @@ const styles = StyleSheet.create({
         flex: 1,
         padding: 24,
         justifyContent: 'center',
-        // alignContent: 'center',
-        // backgroundColor: 'white'
+        alignContent: 'center',
+        backgroundColor: 'white'
     },
     text: {
         color: 'black',        
