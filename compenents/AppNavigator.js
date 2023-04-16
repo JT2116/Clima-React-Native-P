@@ -2,7 +2,7 @@ import React from "react";
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import { MaterialCommunityIcons,MaterialIcons } from '@expo/vector-icons';
 import Citys from './Citys';
-import MyCity from './MyCity';
+import MyCity from './ProfileCity';
 
 
 const Tab = createBottomTabNavigator();
