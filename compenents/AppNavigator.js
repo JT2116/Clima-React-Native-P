@@ -2,7 +2,7 @@ import React from "react";
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import { MaterialCommunityIcons,MaterialIcons } from '@expo/vector-icons';
 import Citys from './Citys';
-import MyCity from './ProfileCity';
+import ProfileCity from './ProfileCity';
 
 
 const Tab = createBottomTabNavigator();
@@ -10,7 +10,7 @@ const Tab = createBottomTabNavigator();
 const AppNavigator = () => {
     return (
         <Tab.Navigator>
-            <Tab.Screen name='My City' component={MyCity} options={{
+            <Tab.Screen name='My City' component={ProfileCity} options={{
                 tabBarIcon: ({size,color}) => {                   
                     return <MaterialCommunityIcons name="weather-partly-cloudy" size={size} color={color} />
                 },
