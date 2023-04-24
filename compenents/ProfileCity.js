@@ -6,8 +6,10 @@ const ProfileCity = () => {
 
     return(        
         <View style={styles.container}>
-            <Image source={{uri:'../assets/02d.png'}}/>
-            <Text>Santiago de los Caballeros</Text>
+            <Text style={styles.textCity}>Las vegas            </Text>
+            <Image style={styles.tinyImage} source={{
+                uri: 'http://openweathermap.org/img/w/02d.png',
+            }}/>            
             <Text>few clouds</Text>
             <Text>Temp: 92.73 °F</Text>
             <Text>Humidity: 43%</Text>
@@ -19,17 +21,20 @@ const ProfileCity = () => {
 const styles = StyleSheet.create({
     container:{
         flex: 1,
-        padding: 24,
         justifyContent: 'center',
         alignContent: 'center',
         backgroundColor: 'white'
     },
-    text: {
-        color: 'black',        
+    textCity: {
+        color: 'black',
+        alignContent: 'center',
+        fontSize: 30,        
+        margin: 27        
     },
-    listView: {
-        flex: 1,
-        justifyContent: 'center',
+    tinyImage: {
+        width: 150,
+        height: 150,
+        // resizeMode: 'center'        
     }
 });
 
