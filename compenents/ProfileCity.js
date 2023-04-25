@@ -10,10 +10,10 @@ const ProfileCity = () => {
             <Image style={styles.tinyImage} source={{
                 uri: 'http://openweathermap.org/img/w/02d.png',
             }}/>            
-            <Text>few clouds</Text>
-            <Text>Temp: 92.73 °F</Text>
-            <Text>Humidity: 43%</Text>
-            <Text>Speed: 9.22 mph</Text>
+            <Text style={styles.textInfo}>few clouds</Text>
+            <Text style={styles.textInfo}>Temp: 92.73 °F</Text>
+            <Text style={styles.textInfo}>Humidity: 43%</Text>
+            <Text style={styles.textInfo}>Speed: 9.22 mph</Text>
         </View>
     );
 };
@@ -30,6 +30,10 @@ const styles = StyleSheet.create({
         alignContent: 'center',
         fontSize: 30,        
         margin: 27        
+    },
+    textInfo: {
+        color: 'black',
+        alignContent: 'center'
     },
     tinyImage: {
         width: 150,
