@@ -14,7 +14,7 @@ const AppNavigator = () => {
                 tabBarIcon: ({size,color}) => {                   
                     return <MaterialCommunityIcons name="weather-partly-cloudy" size={size} color={color} />
                 },
-                tabBarActiveTintColor: '#f0f8ff',
+                tabBarActiveTintColor: '#cdcfd1',
                 tabBarStyle: {
                     backgroundColor: 'black',                                        
                 },
@@ -24,7 +24,7 @@ const AppNavigator = () => {
                 tabBarIcon: ({size,color}) => {
                     return <MaterialIcons name="location-city" size={size} color={color} />                                 
                 },
-                tabBarActiveTintColor: '#f0f8ff',
+                tabBarActiveTintColor: '#cdcfd1',
                 tabBarStyle: {
                     backgroundColor: 'black',                                        
                 },

@@ -1,89 +1,83 @@
-import React, { useState, useEffect } from "react";
+import React, { Component } from "react";
 import { StyleSheet, Text, View, FlatList, ActivityIndicator, Image } from 'react-native';
 import * as Location from 'expo-location';
 
-const MyCity = () => {
+export class MyCity extends Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            location: null,
+            errorMsg: null,
+            city: null,
+            data: [],
+            icon: ''
+        };        
+    };
 
-    const [location, setLocation] = useState(null);
-    const [errorMsg, setErrorMsg] = useState(null);
-    const [city, setCity ] = useState();
+    // const [location, setLocation] = useState(null);
+    // const [errorMsg, setErrorMsg] = useState(null);
+    // const [city, setCity ] = useState();
     
-    const [isLoading, setLoading] = useState(true);
-    const [data, setData] = useState([]);
-    const [icon, setIcon] = useState();
+    // const [isLoading, setLoading] = useState(true);
+    // const [data, setData] = useState([]);
+    // const [icon, setIcon] = useState();
 
     
-    let getCity = async () => {
-        let { status } = await Location.requestForegroundPermissionsAsync();
-        if (status !== 'granted') {
-          setErrorMsg('Permission to access location was denied');
-          return;
-        }
+    // let getCity = async () => {
+    //     let { status } = await Location.requestForegroundPermissionsAsync();
+    //     if (status !== 'granted') {
+    //       setErrorMsg('Permission to access location was denied');
+    //       return;
+    //     }
   
-        let location = await Location.getCurrentPositionAsync({});
-        setLocation(location);
+    //     let location = await Location.getCurrentPositionAsync({});
+    //     setLocation(location);
         
-        const place = await Location.reverseGeocodeAsync({
-          latitude : location.coords.latitude,
-          longitude : location.coords.longitude
-        });
+    //     const place = await Location.reverseGeocodeAsync({
+    //       latitude : location.coords.latitude,
+    //       longitude : location.coords.longitude
+    //     });
         
-        let city;
-        place.find( p => {
-          city = p.city
-          setCity(p.city)
-        });
-    };
+    //     let city;
+    //     place.find( p => {
+    //       city = p.city
+    //       setCity(p.city)
+    //     });
+    // };
 
-    // console.log(city);
-    let url = `http://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=b65498bd83bb91eaf34edf249595fdac`;
+    // // console.log(city);
+    // let url = `http://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=b65498bd83bb91eaf34edf249595fdac`;
 
     
-    let getWeather = async () => {
-        try {
-            const response = await fetch (url);
-            const json = await response.json();            
-            setData(json.weather);
-            // setIcon(json.weather.icon);  
+    // let getWeather = async () => {
+    //     try {
+    //         const response = await fetch (url);
+    //         const json = await response.json();            
+    //         setData(json.weather);
+    //         // setIcon(json.weather.icon);  
                 
-            // console.log(data);        
+    //         // console.log(data);        
                         
-        } catch (error) {
-            console.error(error);
-        } finally {
-            setLoading(false);
-        }
-    };
+    //     } catch (error) {
+    //         console.error(error);
+    //     } finally {
+    //         setLoading(false);
+    //     }
+    // };
 
-    useEffect(() => {
-        getCity();
-        getWeather();
-    },[]);
+    // useEffect(() => {
+    //     getCity();
+    //     getWeather();
+    // },[]);
 
-    // let UrlIcon = ``
-    // console.log(icon);
-    console.log(data[icon]);
+    // // let UrlIcon = ``
+    // // console.log(icon);
+    // console.log(data[icon]);
 
     return(        
-        <View style={styles.container}>
-            <Text style={styles.text}>{city}</Text>
-            <Image
-                source={{uri: 'http://openweathermap.org/img/w/02d.png'}}
-            />            
-            <FlatList
-                data = {data}
-                contentContainerStyle={styles.listView}                
-                renderItem={({item}) =>                        
-                    <Text style={styles.text}>
-                        {item.description}              
-                    </Text>
 
-
-                }                
-            />         
-        </View>
     );
-};
+}
 
 const styles = StyleSheet.create({
     container:{
