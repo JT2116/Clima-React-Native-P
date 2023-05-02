@@ -2,8 +2,7 @@ import React, { useState, useEffect } from "react";
 import { StyleSheet, Text, View, FlatList, ActivityIndicator, Image } from 'react-native';
 
 
-const ProfileCity = () => {
-
+const ProfileCity = ({city,data,icon}) => {
     return(        
         <View style={styles.container}>
             <Text style={styles.textCity}>Santiago de los Caballeros</Text>
