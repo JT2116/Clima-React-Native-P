@@ -2,17 +2,19 @@ import React, { useState, useEffect } from "react";
 import { StyleSheet, Text, View, FlatList, ActivityIndicator, Image } from 'react-native';
 
 
-const ProfileCity = ({city,data,icon}) => {
+const ProfileCity = ({city,data}) => {
+    // console.log(city);
+    console.log(data.main.temp);
     return(        
         <View style={styles.container}>
-            <Text style={styles.textCity}>Santiago de los Caballeros</Text>
+            <Text style={styles.textCity}>{city}</Text>
             <Image style={styles.tinyImage} source={{
                 uri: 'http://openweathermap.org/img/w/02d.png',
             }}/>
             <View style={styles.containerInfo}>
-                <Text style={styles.textInfo}>few clouds</Text>
-                <Text style={styles.textInfo}>Temp: 92.73 °F</Text>
-                <Text style={styles.textInfo}>Humidity: 43%</Text>
+                <Text style={styles.textInfo}>{data.weather[0].description}</Text>
+                <Text style={styles.textInfo}>Temp: {data.main.temp} °F</Text>
+                <Text style={styles.textInfo}>Humidity: {}%</Text>
                 <Text style={styles.textInfo}>Speed: 9.22 mph</Text>
             </View>
         </View>        

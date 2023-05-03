@@ -11,8 +11,7 @@ export class MyCity extends Component {
             errorMsg: null,
             city: null,
             loading: true,
-            data: [],
-            icon: ''
+            data: null                        
         };        
     };
     
@@ -25,7 +24,9 @@ export class MyCity extends Component {
         }
   
         let location = await Location.getCurrentPositionAsync({});
+        // let location = await Location.getCurrentPositionAsync({accuracy: Location.Accuracy.Highest, maximumAge: 10000});
         // setLocation(location);
+        // let location = await Location.getCurrentPositionAsync({timeout: 50000});
         this.setState({...this.state, location: location});
         
         const place = await Location.reverseGeocodeAsync({
@@ -36,21 +37,21 @@ export class MyCity extends Component {
         place.find( p => {
             //city = p.city
             this.setState({...this.state, city: p.city}); 
-
+            this.getWeather(p.city);
         });
     };
   
     
-    getWeather = async () => {
-        let url = `http://api.openweathermap.org/data/2.5/weather?q=${this.getState.city}&units=imperial&appid=b65498bd83bb91eaf34edf249595fdac`;
-
+    getWeather = async (city) => {
+        let url = `http://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=b65498bd83bb91eaf34edf249595fdac`;
+        // console.log(city);
         try {
             const response = await fetch (url);
-            const json = await response.json();            
+            const json = await response.json();   
+            // console.log(json);         
             // data = json.weather;
-            this.setState({...this.state,data: json.weather});            
-            // setIcon(json.weather.icon);  
-            this.setState({...this.state,icon: icon});                            
+            this.setState({...this.state,data: json});            
+            // setIcon(json.weather.icon);                              
         } catch (error) {
             console.error(error);
         } finally {
@@ -61,12 +62,19 @@ export class MyCity extends Component {
         }
     };
 
-    render() {        
+    
+    componentDidMount(){
+        this.getCity();
+        // this.getWeather();
+    }
+
+    render() {   
+        // this.getCity();
+        // this.getWeather();     
         return(
             <ProfileCity
-                city = {this.getState.city}
-                data = {this.getState.data}
-                icon = {this.getState.icon}
+                city = {this.state.city}
+                data = {this.state.data}
             />  
         );
     };
