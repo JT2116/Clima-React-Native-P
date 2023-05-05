@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, FlatList, ActivityIndicator, Image } from 'reac
 import * as Location from 'expo-location';
 import ProfileCity from "./ProfileCity";
 
+
 export class MyCity extends Component {
     constructor(props){
         super(props);
@@ -34,11 +35,13 @@ export class MyCity extends Component {
           longitude : location.coords.longitude
         });
                 
+        let pCity = ''
         place.find( p => {
-            //city = p.city
-            this.setState({...this.state, city: p.city}); 
-            this.getWeather(p.city);
+            pCity = p.city
+            this.setState({...this.state, city: p.city});             
         });
+        
+        this.getWeather(pCity);
     };
   
     
