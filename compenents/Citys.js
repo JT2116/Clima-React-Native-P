@@ -1,12 +1,21 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View,TouchableWithoutFeedback } from 'react-native';
 
 
 const Citys = () => {
 
     return(
         <View style={styles.container}>
-            <Text style={styles.text}>Citys</Text>            
+            <View style={styles.leftContainer}>
+                <View style={styles.thumbnail}>
+                    <Text style={styles.textInfo}>Santiago De los Caballeros</Text>
+                </View>
+                
+
+
+
+            </View>
+                        
         </View>
     )
 }
@@ -16,11 +25,26 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignContent: 'center',
-        backgroundColor: 'white'
+        backgroundColor: '#cdcfd1',
     },
-    text: {
-        color: 'black'
-    }
+    leftContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        flex: 1        
+    },
+    thumbnail:{
+        height: 50,
+        flexBasis: 50,
+        backgroundColor: '#f0f8ff',
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 15
+    },
+    textInfo: {
+        color: 'black',
+        alignContent: 'center',
+        fontSize: 17
+    },
 })
 
 export default Citys;
