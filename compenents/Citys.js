@@ -1,50 +1,27 @@
-import React, { useState, useEffect } from "react";
+import React, { Component } from "react";
 import { StyleSheet, Text, View,TouchableWithoutFeedback } from 'react-native';
+import CitysListItem from "./CitysListItem";
 
 
-const Citys = () => {
+export class Citys extends Component {
+    constructor(props){
+        super(props);
+        this.state = {
+                      
+        };        
+    };
 
-    return(
-        <View style={styles.container}>
-            <View style={styles.leftContainer}>
-                <View style={styles.thumbnail}>
-                    <Text style={styles.textInfo}>Santiago De los Caballeros</Text>
-                </View>
-                
-
-
-
-            </View>
-                        
-        </View>
-    )
+    render() {       
+        return(
+            <CitysListItem/>
+        );
+    };
 }
 
 const styles = StyleSheet.create({
-    container:{
-        flex: 1,
-        justifyContent: 'center',
-        alignContent: 'center',
-        backgroundColor: '#cdcfd1',
-    },
-    leftContainer: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        flex: 1        
-    },
-    thumbnail:{
-        height: 50,
-        flexBasis: 50,
-        backgroundColor: '#f0f8ff',
-        justifyContent: 'center',
-        alignItems: 'center',
-        borderRadius: 15
-    },
-    textInfo: {
-        color: 'black',
-        alignContent: 'center',
-        fontSize: 17
-    },
+    text: {
+        color: 'black',        
+    }
 })
 
 export default Citys;
