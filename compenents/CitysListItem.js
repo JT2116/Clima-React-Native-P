@@ -3,14 +3,26 @@ import { StyleSheet, Text, View, FlatList, ActivityIndicator, Image,Dimensions }
 
 const CitysListItem = () => {
     return(
-        <View style={styles.container}>
-            <View style={styles.leftContainer}>
-                <View style={styles.thumbnail}>
-                    <Image style={styles.tinyImage} source={{
-                        uri: `http://openweathermap.org/img/w/03d.png`,
-                    }}/>                
-                </View>                
-            </View>            
+        <View style={styles.page}>
+
+            <View style={styles.container}>
+                <View style={styles.leftContainer}>
+                    <View style={styles.thumbnail}>
+                        <Image style={styles.tinyImage} source={{
+                            uri: `http://openweathermap.org/img/w/03d.png`,
+                        }}/>                
+                    </View>
+                </View>
+                <View style={styles.titleContainer}>
+                    <Text numberOfLines={1} style={styles.title}>
+                        Santiago de los Caballeros                         
+                    </Text>
+                    <Text>
+                        87.39 °F
+                    </Text>
+                </View>          
+            </View>
+                        
         </View>
     ); 
 
@@ -18,14 +30,17 @@ const CitysListItem = () => {
 
 const {width} = Dimensions.get('window');
 const styles = StyleSheet.create({
+    page:{
+        backgroundColor: '#cdcfd1',        
+    },
     container:{
-        // flex: 1,
-        // justifyContent: 'center',
-        // alignContent: 'center',
         backgroundColor: '#cdcfd1',
         flexDirection: 'row',
         alignSelf: 'center',
-        width: width - 80, 
+        padding: 10,        
+        width: width - 10,
+        borderBottomWidth: 0.9,
+        borderBottomColor: 'black', 
     },
     leftContainer: {
         flexDirection: 'row',
@@ -44,6 +59,15 @@ const styles = StyleSheet.create({
         width: 60,
         height: 60,
         resizeMode: 'contain'               
+    },
+    titleContainer:{
+        width: width-100,
+        justifyContent: 'center'
+        // paddingLeft: 10
+    },
+    title: {
+        fontSize: 18,
+        color: 'black'
     }
 });
 
