@@ -1,27 +1,29 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, Text, View, FlatList, ActivityIndicator, Image,Dimensions } from 'react-native';
+import { StyleSheet, Text, View, Image, Dimensions, TouchableWithoutFeedback } from 'react-native';
 
-const CitysListItem = () => {
+const CitysListItem = ({city,temp,icon}) => {
     return(
         <View style={styles.page}>
 
-            <View style={styles.container}>
-                <View style={styles.leftContainer}>
-                    <View style={styles.thumbnail}>
-                        <Image style={styles.tinyImage} source={{
-                            uri: `http://openweathermap.org/img/w/03d.png`,
-                        }}/>                
+            <TouchableWithoutFeedback>
+                <View style={styles.container}>
+                    <View style={styles.leftContainer}>
+                        <View style={styles.thumbnail}>
+                            <Image style={styles.tinyImage} source={{
+                                uri: `http://openweathermap.org/img/w/03d.png`,
+                            }}/>                
+                        </View>
                     </View>
+                    <View style={styles.titleContainer}>
+                        <Text numberOfLines={1} style={styles.title}>
+                            Santiago de los Caballeros                         
+                        </Text>
+                        <Text style={styles.temp}>
+                            87.39 °F
+                        </Text> 
+                    </View>      
                 </View>
-                <View style={styles.titleContainer}>
-                    <Text numberOfLines={1} style={styles.title}>
-                        Santiago de los Caballeros                         
-                    </Text>
-                    <Text>
-                        87.39 °F
-                    </Text>
-                </View>          
-            </View>
+            </TouchableWithoutFeedback>
                         
         </View>
     ); 
@@ -67,6 +69,10 @@ const styles = StyleSheet.create({
     },
     title: {
         fontSize: 18,
+        color: 'black'
+    },
+    temp: {
+        fontSize: 17,
         color: 'black'
     }
 });
