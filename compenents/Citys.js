@@ -1,6 +1,8 @@
 import React, { Component } from "react";
-import { StyleSheet, Text, View,TouchableWithoutFeedback } from 'react-native';
+import { StyleSheet } from 'react-native';
 import CitysListItem from "./CitysListItem";
+import Screen from "./Screen";
+import { RecyclerListView, LayoutProvider, DataProvider } from "recyclerlistview";
 
 
 export class Citys extends Component {
@@ -9,11 +11,44 @@ export class Citys extends Component {
         this.state = {
                       
         };        
+
+        this.currentItem = {};
     };
 
-    render() {       
+    dataProvider = new DataProvider((r1, r2) => {
+        return r1 !== r2;
+    });
+
+    layoutProvider = new LayoutProvider(
+        (i) =>'audio',(type,dim)=>{
+            switch (type) {
+                case 'audio':
+                    dim.width = Dimensions.get('window').width;
+                    dim.height = 70;
+                    break;
+                default:
+                    dim.width = 0;
+                    dim.height = 0;
+            }
+
+        }
+    );
+
+    render() {      
+        // {({}) => {
+
+        // }} 
         return(
-            <CitysListItem/>
+            <Screen>
+                {/* <CitysListItem/> */}    
+                <RecyclerListView
+                    layoutProvider={this.layoutProvider}
+                    dataProvider={this.dataProvider}
+                    rowRenderer={<CitysListItem/>}
+                    
+                
+                />                    
+            </Screen>
         );
     };
 }
