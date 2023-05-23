@@ -11,28 +11,36 @@ const ViewTypes = {
 };
 
 export class Citys extends Component {
-    // constructor(props){
-    //     super(props);
-    //     this.state = {
-                      
-    //     };        
+    constructor(props){
+        super(props);
+        this.state = {
+            dataCity: null,
+            loading: true                      
+        };        
+    };
 
-    //     this.currentItem = {};
-    // };
+    getCitys = async () => {
+        let url = 'http://api.openweathermap.org/geo/1.0/direct?q=&limit=10&appid=b65498bd83bb91eaf34edf249595fdac';
+
+        try {
+            const response = await fetch (url);
+            const json = await response.json();   
+
+            this.setState({...this.state,dataCity: json});            
+                              
+        } catch (error) {
+            console.error(error);
+        } finally {
+            // setLoading(false);
+            // loading = false;
+            this.setState({...this.state,loading: false})
+
+        }
+    };
     
 
     render() {       
-        // return(
-        //     <Screen>
-        //         {/* <CitysListItem/> */}    
-        //         <RecyclerListView
 
-                    
-                    
-                
-        //         />                    
-        //     </Screen>
-        // );
         return(
             <Screen>
                 <CitysListItem/>
