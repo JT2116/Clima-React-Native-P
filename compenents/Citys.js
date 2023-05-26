@@ -3,47 +3,71 @@ import { StyleSheet,Dimensions } from 'react-native';
 import CitysListItem from "./CitysListItem";
 import Screen from "./Screen";
 import { RecyclerListView, LayoutProvider, DataProvider } from "recyclerlistview";
-
-const ViewTypes = {
-    FULL: 0,
-    HALF_LEFT: 1,
-    HALF_RIGHT: 2
-};
+import * as Location from 'expo-location';
 
 export class Citys extends Component {
     constructor(props){
         super(props);
         this.state = {
-            dataCity: null,
-            loading: true                      
+            dataCity: [],
+            loading: true,
+            countryID: null                      
         };        
     };
 
-    getCitys = async () => {
-        let url = 'http://api.openweathermap.org/geo/1.0/direct?q=&limit=10&appid=b65498bd83bb91eaf34edf249595fdac';
+    getCountry = async () => {
+        let { status } = await Location.requestForegroundPermissionsAsync();
+        if (status !== 'granted') {            
+            this.setState({...this.state,errorMsg: 'Permission to access location was denied'});
+            return;
+        }
+  
+        let location = await Location.getCurrentPositionAsync({});
+
+        this.setState({...this.state, location: location});
+        
+        const place = await Location.reverseGeocodeAsync({
+          latitude : location.coords.latitude,
+          longitude : location.coords.longitude
+        });
+                
+        let pCountry = ''
+        place.find( p => {
+            pCountry = p.isoCountryCode
+            this.setState({...this.state, countryID: p.isoCountryCode});             
+        });
+        
+        this.getCitys(pCountry);
+    };
+
+    getCitys = async (idCountry) => {
+        // let url = `http://api.geonames.org/searchJSON?username=ksuhiyp&country=${idCountry}&maxRows=1000`;
+        let url = `http://api.geonames.org/searchJSON?username=ksuhiyp&country=do&maxRows=1000`;
 
         try {
             const response = await fetch (url);
-            const json = await response.json();   
+            const json = await response.json(); 
 
-            this.setState({...this.state,dataCity: json});            
-                              
+            this.setState({...this.state,dataCity: json.geonames});            
         } catch (error) {
             console.error(error);
-        } finally {
-            // setLoading(false);
-            // loading = false;
+        } finally {            
             this.setState({...this.state,loading: false})
-
         }
     };
-    
 
+    componentDidMount(){
+        this.getCountry();
+    }
+    
     render() {       
 
-        return(
+        return(        
+
             <Screen>
-                <CitysListItem/>
+                <CitysListItem                    
+                    nameCity={this.state.dataCity.name}
+                />
             </Screen>
         );
     };

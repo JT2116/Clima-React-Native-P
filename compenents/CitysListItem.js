@@ -1,30 +1,48 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet, Text, View, FlatList, ActivityIndicator, Image,Dimensions } from 'react-native';
 
-const CitysListItem = () => {
-    return(
-        <View style={styles.page}>
-
-            <View style={styles.container}>
-                <View style={styles.leftContainer}>
-                    <View style={styles.thumbnail}>
-                        <Image style={styles.tinyImage} source={{
-                            uri: `http://openweathermap.org/img/w/03d.png`,
-                        }}/>                
+const CitysListItem = ({nameCity}) => {
+    
+    if (nameCity!=null) {
+        return(
+            <View style={styles.page}>
+    
+                <View style={styles.container}>
+                    <View style={styles.leftContainer}>
+                        <View style={styles.thumbnail}>
+                            <Image style={styles.tinyImage} source={{
+                                uri: `http://openweathermap.org/img/w/03d.png`,
+                            }}/>                
+                        </View>
                     </View>
+                    <View style={styles.titleContainer}>
+                        <Text numberOfLines={1} style={styles.title}>
+                            {/*Santiago de los Caballeros*/}
+                            {nameCity}
+                        </Text>
+                        <Text>
+                            87.39 °F
+                        </Text>
+                    </View>          
                 </View>
-                <View style={styles.titleContainer}>
-                    <Text numberOfLines={1} style={styles.title}>
-                        Santiago de los Caballeros                         
-                    </Text>
-                    <Text>
-                        87.39 °F
-                    </Text>
-                </View>          
+                            
             </View>
-                        
-        </View>
-    ); 
+        );         
+    } else {
+        return(
+            <View style={styles.container}>                               
+                <View style={styles.containerInfo}>                    
+                    <Text style={styles.textInfo}>                        
+                        Loading
+                    </Text>
+                </View>                
+            </View>
+        );        
+    }
+
+
+
+
 
 }
 

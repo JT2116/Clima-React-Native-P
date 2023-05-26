@@ -3,7 +3,6 @@ import { StyleSheet, Text, View, FlatList, ActivityIndicator, Image } from 'reac
 import * as Location from 'expo-location';
 import ProfileCity from "./ProfileCity";
 
-
 export class MyCity extends Component {
     constructor(props){
         super(props);
@@ -18,62 +17,43 @@ export class MyCity extends Component {
     
     getCity = async () => {
         let { status } = await Location.requestForegroundPermissionsAsync();
-        if (status !== 'granted') {
-            //setErrorMsg('Permission to access location was denied');
+        if (status !== 'granted') {            
             this.setState({...this.state,errorMsg: 'Permission to access location was denied'});
             return;
-        }
-  
+        }  
         let location = await Location.getCurrentPositionAsync({});
-        // let location = await Location.getCurrentPositionAsync({accuracy: Location.Accuracy.Highest, maximumAge: 10000});
-        // setLocation(location);
-        // let location = await Location.getCurrentPositionAsync({timeout: 50000});
         this.setState({...this.state, location: location});
-        
         const place = await Location.reverseGeocodeAsync({
           latitude : location.coords.latitude,
           longitude : location.coords.longitude
         });
-                
         let pCity = ''
         place.find( p => {
             pCity = p.city
             this.setState({...this.state, city: p.city});             
-        });
-        
+        });        
         this.getWeather(pCity);
     };
   
     
     getWeather = async (city) => {
-        let url = `http://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=b65498bd83bb91eaf34edf249595fdac`;
-        // console.log(city);
+        let url = `http://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=b65498bd83bb91eaf34edf249595fdac`;        
         try {
             const response = await fetch (url);
-            const json = await response.json();   
-            // console.log(json);         
-            // data = json.weather;
-            this.setState({...this.state,data: json});            
-            // setIcon(json.weather.icon);                              
+            const json = await response.json();
+            this.setState({...this.state,data: json});
         } catch (error) {
             console.error(error);
         } finally {
-            // setLoading(false);
-            // loading = false;
             this.setState({...this.state,loading: false})
-
         }
     };
 
-    
     componentDidMount(){
-        this.getCity();
-        // this.getWeather();
+        this.getCity();        
     }
 
-    render() {   
-        // this.getCity();
-        // this.getWeather();     
+    render() {        
         return(
             <ProfileCity
                 city = {this.state.city}
