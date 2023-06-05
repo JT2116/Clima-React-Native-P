@@ -9,7 +9,7 @@ export class Citys extends Component {
     constructor(props){
         super(props);
         this.state = {
-            dataCity: [],
+            dataCity: null,
             loading: true,
             countryID: null                      
         };        
@@ -46,9 +46,9 @@ export class Citys extends Component {
 
         try {
             const response = await fetch (url);
-            const json = await response.json(); 
-
-            this.setState({...this.state,dataCity: json.geonames});            
+            const json = await response.json();
+            console.log(json.geonames[1].name)
+            this.setState({...this.state,dataCity: json.geonames});         
         } catch (error) {
             console.error(error);
         } finally {            
@@ -57,16 +57,24 @@ export class Citys extends Component {
     };
 
     componentDidMount(){
-        this.getCountry();
+        this.getCountry();        
+    }
+
+    rowRenderer = (nameCity) => {
+        return(
+            <CitysListItem
+                nameCity={nameCity}        
+            />
+        );
     }
     
-    render() {       
-
+    render() {
         return(        
 
             <Screen>
-                <CitysListItem                    
-                    nameCity={this.state.dataCity.name}
+                {/* {this.rowRenderer(this.state.dataCity[2].name)} */}
+                <CitysListItem
+                    nameCity={this.state.dataCity[2].name}
                 />
             </Screen>
         );

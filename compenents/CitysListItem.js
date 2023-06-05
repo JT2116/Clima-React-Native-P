@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet, Text, View, FlatList, ActivityIndicator, Image,Dimensions } from 'react-native';
+import Screen from "./Screen";
 
 const CitysListItem = ({nameCity}) => {
-    
+    // console.log(nameCity);
     if (nameCity!=null) {
         return(
+          
             <View style={styles.page}>
-    
                 <View style={styles.container}>
                     <View style={styles.leftContainer}>
                         <View style={styles.thumbnail}>
@@ -17,16 +18,16 @@ const CitysListItem = ({nameCity}) => {
                     </View>
                     <View style={styles.titleContainer}>
                         <Text numberOfLines={1} style={styles.title}>
-                            {/*Santiago de los Caballeros*/}
-                            {nameCity}
+                            Santiago de los Caballeros
+                            {/* {nameCity[1].name} */}
                         </Text>
                         <Text>
                             87.39 °F
                         </Text>
                     </View>          
-                </View>
-                            
+                </View>                            
             </View>
+            
         );         
     } else {
         return(
@@ -39,10 +40,6 @@ const CitysListItem = ({nameCity}) => {
             </View>
         );        
     }
-
-
-
-
 
 }
 
