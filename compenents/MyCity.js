@@ -37,7 +37,7 @@ export class MyCity extends Component {
   
     
     getWeather = async (city) => {
-        let url = `http://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=b65498bd83bb91eaf34edf249595fdac`;        
+        let url = ``;        
         try {
             const response = await fetch (url);
             const json = await response.json();
