@@ -41,8 +41,8 @@ export class Citys extends Component {
     };
 
     getCitys = async (idCountry) => {
-        // let url = `http://api.geonames.org/searchJSON?username=ksuhiyp&country=${idCountry}&maxRows=1000`;
-        // let url = `http://api.geonames.org/searchJSON?username=ksuhiyp&country=do&maxRows=1000`;
+        let url = ``;
+
 
         try {
             const response = await fetch (url);
