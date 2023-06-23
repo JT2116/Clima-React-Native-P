@@ -42,13 +42,13 @@ export class Citys extends Component {
 
     getCitys = async (idCountry) => {
         // let url = `http://api.geonames.org/searchJSON?username=ksuhiyp&country=${idCountry}&maxRows=1000`;
-        let url = `http://api.geonames.org/searchJSON?username=ksuhiyp&country=do&maxRows=1000`;
+        // let url = `http://api.geonames.org/searchJSON?username=ksuhiyp&country=do&maxRows=1000`;
 
         try {
             const response = await fetch (url);
-            const json = await response.json();
-            console.log(json.geonames[1].name)
-            this.setState({...this.state,dataCity: json.geonames});         
+            const json = await response.json();            
+            this.setState({...this.state,dataCity: json.geonames});
+            console.log(this.state.dataCity[1].name);  
         } catch (error) {
             console.error(error);
         } finally {            
@@ -71,10 +71,14 @@ export class Citys extends Component {
     render() {
         return(        
 
+            
             <Screen>
-                {/* {this.rowRenderer(this.state.dataCity[2].name)} */}
+                {/* {this.rowRenderer(this.state.dataCity[2].name)} 
                 <CitysListItem
                     nameCity={this.state.dataCity[2].name}
+                /> */}
+                <CitysListItem 
+                    nameCity={this.state.dataCity[1].name}
                 />
             </Screen>
         );

@@ -21,7 +21,7 @@ const AppNavigator = () => {
                 },
                 headerShown: false
             }}/>
-            <Tab.Screen name='Citys' component={Citys} options={{                
+            {/* <Tab.Screen name='Citys' component={Citys} options={{                
                 tabBarIcon: ({size,color}) => {
                     return <MaterialIcons name="location-city" size={size} color={color} />                                 
                 },
@@ -31,7 +31,7 @@ const AppNavigator = () => {
                 },
                 headerShown: false
             }}
-            />
+            /> */}
         </Tab.Navigator>
     );    
 }
